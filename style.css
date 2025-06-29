@@ -24,6 +24,7 @@ html[data-theme="light"] {
   --fg-secondary: #474747;
   --link-primary: #2140ba;
   --link-hover: #2c54ce;
+  --text-secondary: #888;
   --table-text: #191715;
   --table-group1: #EEE;
   --table-group2: #DDD;
@@ -31,10 +32,12 @@ html[data-theme="light"] {
   --echlevel-bg: white;
   --echlevel-shadow: #888;
   --enchantment-results: #cfc;
+  --checkbox-border: #777;
   --progress-color: #ffc;
   --error: #f99;
   --phone-warn: #fa9;
-  --solution: #cfc;
+  --solution-primary: #ccffcc;
+  --solution-secondary: #ecffec;
 }
 
 html[data-theme="dark"] {
@@ -44,17 +47,20 @@ html[data-theme="dark"] {
   --fg-secondary: #eee;
   --link-primary: #66b3ff;
   --link-hover: #4d8ac3;
+  --text-secondary: #d0d0d0;
   --table-text: #333;
   --table-group1: #CCC;
   --table-group2: #BBB;
-  --echlevel-color: var(--link-primary);
+  --echlevel-color: #369bff;
   --echlevel-bg: white;
   --echlevel-shadow: #888;
   --enchantment-results: #0E754D;
+  --checkbox-border: var(--table-group2);
   --progress-color: #f1a32f;
   --error: #f90601;
   --phone-warn: #e7cc03;
-  --solution: #03ad5f;
+  --solution-primary: #00ad5c;
+  --solution-secondary: #00935e;
 }
 
 html[data-theme="crimson"] {
@@ -64,6 +70,7 @@ html[data-theme="crimson"] {
   --fg-secondary: #eee;
   --link-primary: #66b3ff;
   --link-hover: #4d8ac3;
+  --text-secondary: #bbb;
   --table-text: #DDD;
   --table-group1: #813151;
   --table-group2: #672741;
@@ -71,10 +78,12 @@ html[data-theme="crimson"] {
   --echlevel-bg: var(--table-group1);
   --echlevel-shadow: var(--table-group2);
   --enchantment-results: #006666;
+  --checkbox-border: var(--table-group2);
   --progress-color: #f1a32f;
   --error: #f90601;
   --phone-warn: #e7cc03;
-  --solution: var(--enchantment-results);
+  --solution-primary: #006666;
+  --solution-secondary: #005f5f;
 }
 
 /* TODO: fix enchantment results variable name, misnomer */
@@ -109,7 +118,7 @@ body h1, body h2 {
 .inner {
     margin: 30px auto;
     width: 1000px;
-    padding-bottom: 30px;
+    padding-bottom: 50px;
     overflow: auto;
 }
 
@@ -132,15 +141,11 @@ a:hover {
 }
 
 #enchants td {
-  padding: 0.4em 0.5em;
+  padding: 0.5em;
 }
 
 #enchants td:first-child {
-  padding: 0.4em 0.8em;
-}
-
-#enchants td:last-child {
-  padding-right: 0.8em;
+  padding-inline: 0.8em;
 }
 
 #enchants tr.group1 td {
@@ -163,7 +168,6 @@ a:hover {
     vertical-align: top;
     box-shadow: 2px 1px 2px var(--echlevel-shadow);
     color: var(--echlevel-color);
-    margin: 2px 0px 2px 0px;
 }
 
 #enchants button.on {
@@ -172,9 +176,71 @@ a:hover {
     background-color: var(--enchantment-results);
 }
 
-#calculate {
-    padding: 8px;
-    font-size: 120%;
+.checkbox,
+.radio {
+  display: flex;
+  width: fit-content;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.checkbox-label,
+.radio-label {
+  padding-left: 6px;
+}
+
+.checkbox-input,
+.radio-input {
+  appearance: none;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: var(--table-group1);
+  border: 1px solid var(--checkbox-border);
+  border-radius: 4px;
+  margin: 3px;
+}
+
+.radio-input {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+}
+
+.checkbox-input::after,
+.radio-input::after {
+  content: "";
+  position: absolute;
+  background-image: url("images/check-mark.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12px 12px;
+}
+
+.radio-input::after {
+  background-image: url("images/dot.png");
+}
+
+.checkbox-input:checked::after {
+  width: 18px;
+  height: 18px;
+}
+
+.radio-input:checked::after {
+  width: 16px;
+  height: 16px;
+}
+
+button#calculate  {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 120%;
+}
+
+button#calculate:disabled {
+  background-color: color-mix(in srgb,var(--echlevel-bg) 60%, transparent);
+  color: color-mix(in srgb, var(--echlevel-color) 60%, transparent);
 }
 
 #left {
@@ -214,17 +280,36 @@ a:hover {
 }
 
 #solution {
-    background-color: var(--solution);
-    padding: 20px;
-    margin-top: 20px;
+  background-color: var(--solution-primary);
+  padding: 20px;
+  margin-top: 12px;
+  border-radius: 8px;
 }
 
 #solution h2 {
-    margin-block-start: 0;
+  margin-block-start: 0;
+  margin-block-end: 12px;
+}
+
+#solution-info {
+  background-color: var(--solution-secondary);
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#timings, #cost {
+  margin: 0;
 }
 
 #steps li {
     margin-bottom: 0.75em;
+}
+
+#hint {
+  color: var(--text-secondary);
 }
 
 .footer {
@@ -276,7 +361,7 @@ a:hover {
 }
 
 #xp-range-note {
-    margin-top: 2em;
+    margin-block: 1em 0;
     font-size: 12px;
 }
 

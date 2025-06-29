@@ -60,19 +60,15 @@
                 <div id="enchants" style="display: none">
                     <table></table>
 
-                    <div id="overrides" style="">
-                        <div>
-                            <label>
-                                <input type="checkbox" id="allow_incompatible" onchange="allowIncompatibleChanged()">
-                                <span id="override-incompatible">Allow incompatible enchantments</span>
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                <input type="checkbox" id="allow_many" onchange="allowManyChanged()">
-                                <span id="override-max-number">Allow more than 10 enchantments</span>
-                            </label>
-                        </div>
+                    <div id="overrides">
+                        <label class="checkbox">
+                            <input class="checkbox-input" type="checkbox" id="allow_incompatible" onchange="allowIncompatibleChanged()">
+                            <span class="checkbox-label" id="override-incompatible">Allow incompatible enchantments</span>
+                        </label>
+                        <label class="checkbox">
+                            <input class="checkbox-input" type="checkbox" id="allow_many" onchange="allowManyChanged()">
+                            <span class="checkbox-label" id="override-max-number">Allow more than 10 enchantments</span>
+                        </label>
                     </div>
                     <p>
                         <button id="calculate">Calculate &raquo;</button>
@@ -84,13 +80,13 @@
 
                 <p id="mode_selection">
                     <span id="optimize-label">Optimize for:</span>
-                    <label>
-                        <input type="radio" name="cheapness-mode" checked="checked" value="levels">
-                        <span id="optimize-xp">Least XP/Levels</span>
+                    <label class="radio">
+                        <input class="radio-input" type="radio" name="cheapness-mode" checked="checked" value="levels">
+                        <span class="radio-label" id="optimize-xp">Least XP/Levels</span>
                     </label>
-                    <label>
-                        <input type="radio" name="cheapness-mode" value="prior_work">
-                        <span id="optimize-pwp">Least Prior Work Penalty</span>
+                    <label class="radio">
+                        <input class="radio-input" type="radio" name="cheapness-mode" value="prior_work">
+                        <span class="radio-label" id="optimize-pwp">Least Prior Work Penalty</span>
                     </label>
                 </p>
 
@@ -102,8 +98,14 @@
                 <div id="solution" style="display: none">
                     <h2 id="solution-header">Optimal solution found!</h2>
 
-                    <p id="timings">Completed in under a second</p>
-                    <p><b id="total-cost-label">Total cost:</b> <span id="level-cost">####</span></p>
+                    <div id="solution-info">
+                        <p id="timings">Completed in under a second</p>
+                        <p id="cost">
+                            <b id="total-cost-label">Total cost:</b> 
+                            <span id="level-cost">####</span>
+                        </p>
+                    </div>
+
                     <h3>Steps</h3>
                     <ol id="steps">
                     </ol>

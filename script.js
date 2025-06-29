@@ -331,7 +331,7 @@ function displayInstructionText(instruction) {
     const cost_text = languageJson.cost + displayLevelXpText(levels, xp);
     const prior_work_text = languageJson.prior_work_penalty + displayLevelsText(work);
 
-    return instruction_text + "<br><small>" + cost_text + ", " + prior_work_text + "</small>";
+    return instruction_text + "<br><small id='hint'>" + cost_text + ", " + prior_work_text + "</small>";
 }
 
 function displayEnchantmentsText(enchants) {
